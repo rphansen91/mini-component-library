@@ -27,7 +27,6 @@ const ProgressBar = ({ value, size }) => {
   return (
     <ProgressOuter
       role="progressbar"
-      aria-labelledby="loadinglabel"
       aria-valuemin="0"
       aria-valuemax="100"
       aria-valuenow={value}
