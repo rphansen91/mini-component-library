@@ -7,32 +7,41 @@ import VisuallyHidden from "../VisuallyHidden";
 
 const STYLES = {
   small: {
-    '--height': '8px',
-    '--radius': '4px',
-    '--padding': '0',
+    height: 8,
+    radius: 4,
+    padding: 0,
   },
   medium: {
-    '--height': '12px',
-    '--radius': '4px',
-    '--padding': '0',
+    height: 12,
+    radius: 4,
+    padding: 0,
   },
   large: {
-    '--height': '24px',
-    '--radius': '8px',
-    '--padding': '4px',
+    height: 24,
+    radius: 8,
+    padding: 4,
   },
 }
 
 const ProgressBar = ({ value, size }) => {
+  const styles = STYLES[size]
   return (
     <ProgressOuter
       role="progressbar"
       aria-valuemin="0"
       aria-valuemax="100"
       aria-valuenow={value}
-      style={STYLES[size]}
+      style={{
+        '--padding': styles.padding + 'px',
+        '--radius': styles.radius + 'px',
+      }}
     >
-      <ProgressInner value={value} />
+      <ProgressWrapper>
+        <ProgressInner style={{
+          '--width': value + '%',
+          '--height': styles.height + 'px',
+        }} />
+      </ProgressWrapper>
       <VisuallyHidden>{value}%</VisuallyHidden>
     </ProgressOuter>
   );
@@ -43,13 +52,17 @@ const ProgressOuter = styled.div`
   background-color: ${COLORS.transparentGray15};
   border-radius: var(--radius);
   padding: var(--padding);
-  height: var(--height);
+`
+
+const ProgressWrapper = styled.div`
+  border-radius: 4px;
+  overflow: hidden;
 `
 
 const ProgressInner = styled.div`
-  background: ${(props) => `linear-gradient(to right, ${COLORS.primary} 0%, ${COLORS.primary} ${props.value}%, transparent ${props.value}%, transparent 100%)`};
-  border-radius: 4px;
-  height: 100%;
+  background: ${COLORS.primary};
+  width: var(--width);
+  height: var(--height);
 `
 
 export default ProgressBar;
