@@ -65,6 +65,7 @@ width: 100%;
 border: 0;
 outline-offset: 4px;
 color: ${COLORS.gray700};
+background-color: transparent;
 font-weight: 700;
 
 &:hover {
