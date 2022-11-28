@@ -30,14 +30,15 @@ const IconInput = ({
   placeholder,
 }) => {
   return <Wrapper width={width}>
+    <VisuallyHidden>{label}</VisuallyHidden>
     <IconPlacement id={icon} size={ICONS_SIZE[size]} />
-    <Input label={label} placeholder={placeholder} style={STYLES[size]} />
+    <Input placeholder={placeholder} style={STYLES[size]} />
   </Wrapper>;
 };
 
 const toUnit = (unit) => (props) => typeof props[unit] === 'number' ? `${props[unit]}px` : props[unit]
 
-const Wrapper = styled.div`
+const Wrapper = styled.label`
 position: relative;
 display: inline-block;
 border-bottom: 1px solid;
@@ -55,7 +56,6 @@ margin: auto;
 left: 0;
 top: 50%;
 transform: translateY(-50%);
-pointer-events: none;
 `
 
 const Input = styled.input`
@@ -64,13 +64,9 @@ font-size: var(--font-size);
 width: 100%;
 border: 0;
 outline-offset: 4px;
-color: ${COLORS.gray700};
+color: inherit;
 background-color: transparent;
 font-weight: 700;
-
-&:hover {
-  color: ${COLORS.black};
-}
 
 &::placeholder {
   color: ${COLORS.gray500};
