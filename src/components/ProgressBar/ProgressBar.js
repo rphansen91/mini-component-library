@@ -33,6 +33,7 @@ const ProgressBar = ({ value, size }) => {
       style={STYLES[size]}
     >
       <ProgressInner value={value} />
+      <VisuallyHidden>{value}%</VisuallyHidden>
     </ProgressOuter>
   );
 };
